@@ -168,23 +168,47 @@ footer {
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 900px) {
-  #review {
-    margin-left: -6px;
-    padding-left: 0px;
-    margin-top: auto;
+  #marketing {
+    font-size: 1%;
+   
+  }
+  #imgDelorean {
+    width:1%;
+    margin-top: -21px;
   }
   .division {
-    margin-top: 350px;
-    position: static;
+   font-size: 1px;
   }
-
+  #review {
+    margin-left: -6px;
+    margin-top: -70px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .division {
+    margin-top: 170px;
+    position: static;
+   
+  }
+  .division1 {
+    margin-top: 15px;
+    position: static;
+   
+  }
+  .gallery img{
+    width: 95px;
+   }
+  .gallery1 img{
+   width: 95px;
+  }
+  div.gallery, div.gallery1{
+    width: 120px;
+  }
   nav {
     width: 100%;
     word-spacing: 3dvw;
     text-align: center;
+    margin-top: 20px;
   }
   
-
-
-
 }

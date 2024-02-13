@@ -37,28 +37,31 @@
   text-decoration: none;
   color: black;
 }
+
 nav {
-  margin-top: 40px;
   background-color: black;
-  height: 55px;
-  text-align: center;
-  word-spacing: 250px;
-  overflow-y: hidden;
+  overflow: hidden;
+  text-align: center; 
+  margin-top: 20px;
 }
 
-nav li {
-  
-  color: #f2f2f2;
-  text-decoration: none;
-  font-size: 32px;
+nav ul li {
   display: inline;
-  
-  
+  height: 50px;
+  font-size: 32px;
+  padding-left: 7%; 
 }
 
-nav li:hover {
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding-left: 1px;
 
-  background-color: #ddd;
+ }
+
+nav a:hover {
+
+  background-color:white;
   color: black;
   
 }
@@ -168,6 +171,12 @@ footer {
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 900px) {
+
+  nav {
+    width: 100%;
+    word-spacing: 4dvw;
+    text-align: left;
+  }
   #marketing {
     font-size: 1%;
    
@@ -203,12 +212,6 @@ footer {
   }
   div.gallery, div.gallery1{
     width: 120px;
-  }
-  nav {
-    width: 100%;
-    word-spacing: 3dvw;
-    text-align: center;
-    margin-top: 20px;
   }
   
 }

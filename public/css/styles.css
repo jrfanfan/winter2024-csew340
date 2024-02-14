@@ -162,6 +162,37 @@ div.desc, div.desc1 {
   font-size: 30px;
 }
 
+#inv-display {
+  font-size: 14px;
+  width: 100%;
+  display:flex;
+  margin-left: -10px;
+  
+  
+}
+
+#inv-display li {
+  padding-left:1px;
+  list-style: none;
+  line-height: 1px;
+  text-align: center;
+  
+}
+#inv-display li a {
+  font-size: 18px;
+  text-decoration: none;
+  line-height: 16px;
+
+}
+
+#inv-display img {
+  height: 150px;
+  width: 225px;
+  
+}
+#inv-display hr {
+  width: 225px;
+}
 
 footer {
   padding-top: 40px;

@@ -267,6 +267,14 @@ footer {
     word-spacing: 4dvw;
     text-align: left;
   }
+
+  nav ul li {
+    display: inline;
+    height: 50px;
+    font-size: 32px;
+    padding-left: 3%; 
+    margin-left: 2px;
+  }
   #marketing {
     font-size: 1%;
    
@@ -303,5 +311,16 @@ footer {
   div.gallery, div.gallery1{
     width: 120px;
   }
+
+  
+  .inv_detail {
+    margin-top: 400px;
+    padding-top: 50px;
+  }
+  .aside {
+    margin-left: 1px ;
+    margin-top: -800px ;
+  }
+
   
 }

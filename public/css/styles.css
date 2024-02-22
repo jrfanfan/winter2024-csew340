@@ -194,6 +194,65 @@ div.desc, div.desc1 {
   width: 225px;
 }
 
+.inv_detail {
+  background-color: rgb(21, 6, 230);
+  color: aliceblue;
+  width: 500px;
+  font-size: 20px;
+  padding: 4px 4px;
+  margin-top: 45px;
+  text-align: center;
+
+}
+
+.inv_detail img {
+  height: 325px;
+  width: 490px;
+  
+}
+.aside {
+  
+  position:absolute;
+  width: 500px;
+  float: right;
+  margin-top: -408px;
+  margin-left: 515px;
+  height: 403px;
+}
+
+.aside h3 {
+  font-size: 32px;
+  margin-top: -54px;
+}
+.aside #price-view {
+  background-color: rgb(179, 198, 218);
+  height: 152px;
+  margin-top: -30px;
+  padding-top: 15px;
+  font-size: 26px;
+  font-weight: bolder;
+  padding-left: 125px;
+}
+
+.aside #price-view #as_p {
+  color: crimson;
+  margin-left: -55px;
+
+}
+
+.aside #price-view #as_p2  {
+  border: 2px solid red;
+  padding-left: 25px;
+  margin-left: -55px;
+  border-radius: 50px 20px;
+  background-color: rgb(5, 64, 131);
+  font-size: 24px;
+  font-weight: bolder;
+  width: 50%;
+  color: aliceblue;
+
+}
+
 footer {
   padding-top: 40px;
 }

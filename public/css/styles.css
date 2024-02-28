@@ -258,6 +258,40 @@ div.desc, div.desc1 {
   font-style: italic;
 }
 
+.login {
+  background-color: rgb(9, 109, 155);
+  width: 500px;
+  margin-left: 140px;
+  padding: 12px 8px;
+  font-size: 26px;
+  border: 2px solid #81e4f1;
+  margin-top: 40px;
+  margin-left: 30%;
+}
+#form3 label {
+  display: block;
+  margin-left: 100px;
+}
+
+#form3 {
+  border: 2px solid #81e4f1;
+  padding: 9px 6px;
+  background-color: #06acee;
+}
+#form3 input {
+  height: 26px;
+  width: 250px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-left: 100px;
+}
+#submit {
+  height: 40px;
+  font-weight:bolder;
+  font-size: 16px;
+  background-color: #82ceec;
+}
+
 footer {
   padding-top: 40px;
 }

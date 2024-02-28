@@ -15,6 +15,7 @@ const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const accountController = require("./controllers/accountController")
 
 /* ***********************
  * Middleware
@@ -54,10 +55,14 @@ app.get("/", baseController.buildHome)
 utilities.handleErrors(baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
+// account route.
+app.use("/account", accountController.buildLogin)
+utilities.handleErrors(accountController.buildLogin)
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-})
+  })
+
 
 /* ***********************
 * Express Error Handler

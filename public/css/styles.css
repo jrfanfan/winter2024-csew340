@@ -253,6 +253,11 @@ div.desc, div.desc1 {
 
 }
 
+.notice {
+  color: rgb(248, 9, 9);
+  font-style: italic;
+}
+
 footer {
   padding-top: 40px;
 }

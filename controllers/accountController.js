@@ -1,10 +1,12 @@
 utilities = require("../utilities/index")
 const accountModel = require("../models/account-model")
+const bcrypt = require("bcryptjs")
 /* ****************************************
 *  Deliver login view
 * *************************************** */
 async function buildLogin(req, res, next) {
   let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message.")
   res.render("account/login", {
     title: "Login",
     nav,
@@ -16,6 +18,7 @@ async function buildLogin(req, res, next) {
 * *************************************** */
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message.")
   res.render("account/register", {
     title: "Register",
     nav,

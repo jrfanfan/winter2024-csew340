@@ -8,10 +8,10 @@ const accountController = require("../controllers/accountController")
 router.get("/account: login", utilities.handleErrors(accountController.buildLogin))
 
 // Deliver a Registration view.
-router.get("account: register", utilities.handleErrors(accountController.buildRegister))
+router.get("/account: register", utilities.handleErrors(accountController.buildRegister))
 
 // Process Registration
-router.post("/register", utilities.handleErrors(accountController.registerAccount))
+router.post('/register', utilities.handleErrors(accountController.registerAccount))
 
 
 module.exports = router

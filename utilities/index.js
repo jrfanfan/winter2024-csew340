@@ -63,7 +63,7 @@ Util.buildClassificationGrid = async function(data){
 Util.buildClassificationGrid2 = async function(data){
   let grid2
   if(data.length > 0){
-    data.forEach(vehicle => { 
+    data.forEach(vehicle => {
       grid2 = `<div class="inv_detail">`
       grid2 += `<p>This vehicle has passed inspection <br> by an ASE-cetified technician.</p> `
       grid2 +=`<img src="` + vehicle.inv_image +  `" ` + ` alt="Image of ` + vehicle.inv_make + ` `
@@ -87,6 +87,7 @@ Util.buildClassificationGrid2 = async function(data){
     grid2 += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid2
+  
 }
 
 /* ****************************************

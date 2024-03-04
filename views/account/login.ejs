@@ -1,15 +1,8 @@
 <h1>Login</h1>
-<% if (errors) { %>
-    <ul class="notice">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-  <% } %>
 <%- messages() %>
 <div class="login">
     <div id="form3">
-    <form action="/models/account-model.js" id="login">
+    <form action="/account/login" id="login">
     <label for="accountEmail">Email Address:</label>
     <input type="email" id="accountEmail" name="account_email" required autofocus>
     <label for="accountPassword">Password:</label>
@@ -17,5 +10,5 @@
     <input type="submit" value="Login" id="submit">
     </form>
     </div>
-    <p style="text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">No account? <a href="/views/account/register">Sign up</a></p>
+    <p style="text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">No account? <a href="/account/register">Sign up</a></p>
     </div>

@@ -1,4 +1,4 @@
-const utilities = require("./utilities/")
+
 /* ******************************************
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
@@ -7,10 +7,11 @@ const utilities = require("./utilities/")
  * Require Statements
  *************************/
 const session = require("express-session")
-const pool = require("./database/")
+const pool = require('./database/')
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
+const utilities = require("./utilities/")
 const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
@@ -59,12 +60,8 @@ app.get("/", baseController.buildHome)
 utilities.handleErrors(baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
-// account route.
-app.use("/account", accountController.buildLogin)
-utilities.handleErrors(accountController.buildLogin)
-// account registration.
-app.use("/views/account/register", accountController.buildRegister)
-utilities.handleErrors(accountController.buildRegister)
+// Account routes
+app.use("/account", require("./routes/accountRoute"))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})

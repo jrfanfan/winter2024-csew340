@@ -29,10 +29,37 @@ invCont.buildByClassificationDetail = async function (req, res) {
   let nav = await utilities.getNav()
   const className = data[0].classification_name
   res.render("./inventory/classification1", {
-    title: className  + " vehicles",
+    title: className + " vehicles",
     nav,
     grid2,
   })
+}
+
+/* ***************************
+ *  Build management view
+ * ************************** */
+invCont.buildByManagement = async function (req, res) {
+  const grid3 = await utilities.buildManagement()
+  let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message.")
+  res.render("./inventory/management", {
+    title: "Management",
+    nav,
+    grid3,
+  })
+}
+
+/* ***************************
+ *  Build management view
+ * ************************** */
+invCont.buildByAddNewClassification = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "AddNewClassification",
+    nav,
+    
+  })
+
 }
 
 module.exports = invCont

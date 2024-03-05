@@ -16,7 +16,6 @@ const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const accountController = require("./controllers/accountController")
 const bodyParser = require("body-parser")
 
 /* ***********************

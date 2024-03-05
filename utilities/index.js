@@ -90,6 +90,21 @@ Util.buildClassificationGrid2 = async function(data){
   
 }
 
+/* **************************************
+* Build the management view HTML
+* ************************************ */
+Util.buildManagement = async function() {
+  let grid3
+  grid3 = `<h1>`
+  grid3 += `Vehicle Management`
+  grid3 += `</h1>`
+  grid3 += `<div class = "management">`
+  grid3 += `<a href="/../inv/add-classification">Add New Classification </a> <br><br>` 
+  grid3 += `<a href="/../inv/addInventory">Add New Vehicle</a>` 
+  grid3 += `</div>`
+     
+  return grid3
+}
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

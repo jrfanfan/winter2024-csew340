@@ -330,7 +330,41 @@ input:invalid {
     inset -2px -2px 3px rgba(255, 255, 255, 0.6),
     inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
+.management a {
+  margin-left: 35px;
+  font-size: 22px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
+.newClassification {
+  background-color: rgb(19, 158, 223);
+  width: 800px;
+  margin-left: 500px;
+  padding: 12px 8px;
+  font-size: 20px;
+  border: 2px solid #81e4f1;
+  margin-top: 70px;
+}
+
+#form {
+  border: 2px solid #82ceec;
+  margin-right: 2px;
+  font-family:cursive;
+  padding-left: 15px;
+}
+
+#form1 {
+    margin-top: 12px;
+    display: block;
+    font-size: 26px;
+  }
+
+#form1 input {
+    height: 26px;
+    width: 250px;
+    font-size: 16px;
+    margin-left: 200px;
+  }
 
 footer {
   padding-top: 20px;

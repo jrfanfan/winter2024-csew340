@@ -16,6 +16,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
+    errors: null,
   })
 }
 
@@ -32,6 +33,7 @@ invCont.buildByClassificationDetail = async function (req, res) {
     title: className + " vehicles",
     nav,
     grid2,
+    errors: null,
   })
 }
 
@@ -46,20 +48,55 @@ invCont.buildByManagement = async function (req, res) {
     title: "Management",
     nav,
     grid3,
+    errors: null,
   })
 }
 
 /* ***************************
- *  Build management view
+ *  Build add new classification view
  * ************************** */
 invCont.buildByAddNewClassification = async function(req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/add-classification", {
     title: "AddNewClassification",
     nav,
+    errors: null,
     
   })
 
 }
 
+/* ****************************************
+*  Process Registration new classification
+* *************************************** */
+invCont.registerNewClassification = async function(req, res) {
+  let nav = await utilities.getNav()
+  const { classification_name} = req.body
+
+  const regResult = await invModel.registerClassification( classification_name )
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you have added a new name: ${classification_name}`
+    )
+    let nav = await utilities.getNav()
+    res.status(201).render("./inventory/add-classification", {
+      title: "AddNewClassification",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the registration failed.")
+    res.status(501).render("./inventory/add-classification", {
+      title: "AddNewClassification",
+      nav,
+      errors: null,
+
+
+
+    })
+  }
+
+}
 module.exports = invCont

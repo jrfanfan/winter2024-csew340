@@ -365,6 +365,29 @@ input:invalid {
     font-size: 16px;
     margin-left: 200px;
   }
+  .newInventory{
+    background-color: rgb(19, 158, 223);
+    width: 500px;
+    margin-left: 140px;
+    padding: 12px 8px;
+    font-size: 26px;
+    border: 2px solid #81e4f1;
+    margin-top: 40px;
+    margin-left: 30%;
+  }
+  
+  #form2 input input:valid {
+    height: 26px;
+    width: 250px;
+    font-size: 16px;
+    
+  }
+  #form2 label {
+    display: block;
+  }
+  #form2 #description {
+    width: 360px;
+  }
 
 footer {
   padding-top: 20px;

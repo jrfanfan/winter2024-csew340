@@ -75,7 +75,7 @@ invCont.registerNewClassification = async function(req, res) {
 
   const regResult = await invModel.registerClassification( classification_name )
 
-  if (regResult) {
+  if (regResult.lenght > 0) {
     req.flash(
       "notice",
       `Congratulations, you have added a new name: ${classification_name}`
@@ -88,7 +88,6 @@ invCont.registerNewClassification = async function(req, res) {
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
-    let nav = await utilities.getNav()
     res.status(501).render("./inventory/add-classification", {
       title: "AddNewClassification",
       nav,
@@ -100,4 +99,51 @@ invCont.registerNewClassification = async function(req, res) {
   }
 
 }
+
+/* ***************************
+ *  Build add new inventory view
+ * ************************** */
+invCont.buildByAddInventory = async function(req, res) {
+  const grid4 = await utilities.builAddInvetory()
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventory", {
+    title: " addInvetory",
+    nav,
+    grid4,
+  })
+
+}
+
+/* ****************************************
+*  Process Registration new inventory
+* *************************************** */
+invCont.registerNewInventory = async function(req, res) {
+  let nav = await utilities.getNav()
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body
+
+  const regResult = await invModel.registerInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+
+  if (regResult.lenght > 0) {
+    req.flash(
+      "notice",
+      `Congratulations, you have added a new make: ${inv_make}`
+    )
+    let nav = await utilities.getNav()
+    res.status(201).render("./inventory/add-classification", {
+      title: "AddNewInventory",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the registration failed.")
+    res.status(501).render("./inventory/add-classification", {
+      title: "AddNewInventory",
+      nav,
+      errors: null,
+    })
+  }
+
+}
+
+
 module.exports = invCont

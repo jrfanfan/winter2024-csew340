@@ -100,11 +100,58 @@ Util.buildManagement = async function() {
   grid3 += `</h1>`
   grid3 += `<div class = "management">`
   grid3 += `<a href="/../inv/add-classification">Add New Classification </a> <br><br>` 
-  grid3 += `<a href="/../inv/addInventory">Add New Vehicle</a>` 
+  grid3 += `<a href="/../inv/add-inventory">Add New Vehicle</a>` 
   grid3 += `</div>`
      
   return grid3
 }
+
+Util.builAddInvetory =  async function() {
+  let data = await invModel.getClassifications()
+  let grid4
+  grid4 = `<h1>`
+  grid4 += `Add New Inventory`
+  grid4 += `</h1>`
+  grid4 += `<div class="newInventory">`
+  grid4 += `<h3>ALL FIELDS ARE REQUIRED</h3>`
+  grid4 += `<div id="form">`
+  grid4 += `<form id="form2" action="/inv/add-inventory" method="post" >`
+  grid4 += `<label for="chooseClassification">Classification</label>`
+  grid4 += `<select id="chooseClassification" name="classification_id" required>`
+  grid4 +=` <option value="">--Choose a Classification--</option>`
+  grid4 += `<ul>`
+  data.rows.forEach((row) => {
+    grid4 += `<li>`
+    grid4 += `<option>` 
+    grid4 +=  row.classification_name + '  Id: ' + row.classification_id
+    grid4 += `</option>`
+    grid4 += `</li>`
+  })
+  grid4 += `</ul>`
+  grid4 += `</select> <br>`
+  grid4 += `<label for="invMake">Make</label>
+  <input name="inv_make" id="invMake" type="text"  minlength="3" placeholder="Min of 3 characters" required><br>
+  <label for="invModel">Model</label>
+  <input name="inv_model" id="invModel" type="text"  minlength="3" placeholder="Min of 3 characters" required>
+  <label for="invDescription">Description</label>
+  <textarea name=" inv_description" id="description" rows="4" cols="25" required></textarea>
+  <label for="invImage">Image Path</label>
+  <input name="inv_image" value="/images/vehicles/no-image.png" id="invImage" type="text" placeholder="/images/vehicles/no-image.png">
+  <label for="invImageThumbnail">Thumbnail Path</label>
+  <input name="inv_thumbnail" value="/images/vehicles/no-image-tn.png" id="invThumnail" type="text" placeholder="/images/vehicles/no-image.png">
+  <label for="invPrice">Price</label>
+  <input name="inv_price" id="invPrice" type="text"  placeholder="Decimal or integer" required>
+  <label for="invYear">Year</label>
+  <input name="inv_year" id="invYear" type="text" minlength="4"  maxlength="4" placeholder="4-digit Year" required>
+  <label for="invColor">Color</label>
+  <input name="inv_color" id="invColor" type="text" minlength="4" required><br>
+  <button class="favorite styled"  style="margin-left:300px;"  type="submit">Add Inventory</button><br><br>`
+  grid4 += `</form>`
+  grid4 += `</div>`
+  grid4 += `</div>`
+  return grid4
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

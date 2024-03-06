@@ -9,15 +9,17 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:classificationId2", utilities.handleErrors(invController.buildByClassificationDetail));
 router.get("/site-name/inv/", utilities.handleErrors(invController.buildByManagement));
 router.get("/add-classification", utilities.handleErrors(invController.buildByAddNewClassification));
+// Process Registration new inventory
+router.get("/add-inventory", utilities.handleErrors(invController.buildByAddInventory))
 // Process Registration new classification
 router.post('/add-classification', utilities.handleErrors(invController.registerNewClassification));
-// Process the registration data
 router.post(
     "/add-classification",
     regValidate.registationRules(),
     regValidate.checkRegData,
     utilities.handleErrors(invController.registerNewClassification)
   )
-
+// Process Registration new inventory
+router.post('/add-inventory', utilities.handleErrors(invController.registerNewInventory));
 
 module.exports = router;

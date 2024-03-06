@@ -88,6 +88,7 @@ invCont.registerNewClassification = async function(req, res) {
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
+    let nav = await utilities.getNav()
     res.status(501).render("./inventory/add-classification", {
       title: "AddNewClassification",
       nav,

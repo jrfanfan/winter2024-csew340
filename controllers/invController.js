@@ -78,8 +78,8 @@ invCont.registerNewClassification = async function(req, res) {
       `Congratulations, you have added a new name: ${classification_name}`
     )
     let nav = await utilities.getNav()
-    res.status(201).render("./inventory/site-name/inv", {
-      title: "AddNewClassification",
+    res.status(201).render("./inventory/management", {
+      title: "Management",
       nav,
       errors: null,
     })

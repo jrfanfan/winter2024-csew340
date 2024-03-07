@@ -125,8 +125,8 @@ invCont.registerNewInventory = async function(req, res) {
     inv_description,
     inv_image,
     inv_thumbnail,
-    inv_price,
-    inv_miles,
+    parseInt(inv_price),
+    parseInt(inv_miles),
     inv_color,
     classification_id
   )

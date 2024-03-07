@@ -7,23 +7,23 @@
             <label for="chooseClassification">Classification</label>
             <%- grid4 %>
             <label for="invMake">Make</label>
-            <input name="inv_make" id="invMake" type="text"  minlength="3" placeholder="Min of 3 characters" required><br>
+            <input type="text" id="invMake"  name="inv_make"    minlength="3" placeholder="Min of 3 characters" required><br>
             <label for="invModel">Model</label>
-            <input name="inv_model" id="invModel" type="text"  minlength="3" placeholder="Min of 3 characters" required>
+            <input type="text" id="invModel" name="inv_model"   minlength="3" placeholder="Min of 3 characters" required>
             <label for="invDescription">Description</label>
-            <textarea type="text" name=" inv_description" id="description" rows="4" cols="25" required></textarea>
+            <textarea type="text" id="description" name=" inv_description"  rows="4" cols="25" required></textarea>
             <label for="invImage">Image Path</label>
-            <input type="text" name="inv_image" value="/images/vehicles/no-image.png" id="invImage" type="text" placeholder="/images/vehicles/no-image.png">
+            <input type="text" id="invImage" name="inv_image" value="/images/vehicles/no-image.png" placeholder="/images/vehicles/no-image.png">
             <label for="invImageThumbnail">Thumbnail Path</label>
-            <input type="text" name="inv_thumbnail" value="/images/vehicles/no-image-tn.png" id="invThumnail" type="text" placeholder="/images/vehicles/no-image.png">
+            <input type="text" id="invThumbnail name="inv_thumbnail" value="/images/vehicles/no-image-tn.png"  placeholder="/images/vehicles/no-image.png">
             <label for="invPrice">Price</label>
-            <input type="text" name="inv_price" placeholder="Decimal or integer" required>
+            <input type="text" id="invPrice" name="inv_price" placeholder="Decimal or integer" required>
             <label for="invPrice">Miles</label>
-             <input type="text" name="inv_miles" required>
+            <input type="text" id="miles" name="inv_miles" required>
             <label for="invYear">Year</label>
             <input type="text" name="inv_year" minlength="4"  maxlength="4" placeholder="4-digit Year" required>
             <label for="invColor">Color</label>
-            <input type="text" name="inv_color" id="invColor"  minlength="3" required><br>
+            <input type="text" id="invColor" name="inv_color"  minlength="3" required><br>
             <button class="favorite styled"  style="margin-left:300px;"  type="submit">Add Inventory</button><br><br>`
         </form>
     </div>

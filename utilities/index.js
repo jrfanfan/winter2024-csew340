@@ -91,20 +91,8 @@ Util.buildClassificationGrid2 = async function(data){
 }
 
 /* **************************************
-* Build the management view HTML
+* Build partial new vehicle view HTML
 * ************************************ */
-Util.buildManagement = async function() {
-  let grid3
-  grid3 = `<h1>`
-  grid3 += `Vehicle Management`
-  grid3 += `</h1>`
-  grid3 += `<div class = "management">`
-  grid3 += `<a href="/../inv/add-classification">Add New Classification </a> <br><br>` 
-  grid3 += `<a href="/../inv/add-inventory">Add New Vehicle</a>` 
-  grid3 += `</div>`
-     
-  return grid3
-}
 
 Util.builAddInvetory =  async function() {
   let data = await invModel.getClassifications()

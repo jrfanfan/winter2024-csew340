@@ -81,14 +81,14 @@ invCont.registerNewClassification = async function(req, res) {
       `Congratulations, you have added a new name: ${classification_name}`
     )
     let nav = await utilities.getNav()
-    res.status(201).render("./inventory/add-classification", {
+    res.status(201).render("./inventory/site-name/inv", {
       title: "AddNewClassification",
       nav,
       errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
-    res.status(501).render("./inventory/add-classification", {
+    res.status(501).render("./inventory/site-name/inv", {
       title: "AddNewClassification",
       nav,
       errors: null,
@@ -123,22 +123,26 @@ invCont.registerNewInventory = async function(req, res) {
 
   const regResult = await invModel.registerInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
 
-  if (regResult.lenght > 0) {
+  if (regResult) {
     req.flash(
       "notice",
       `Congratulations, you have added a new make: ${inv_make}`
     )
+    const grid3 = await utilities.buildManagement()
     let nav = await utilities.getNav()
-    res.status(201).render("./inventory/add-classification", {
+    res.status(201).render("./inventory/management", {
       title: "AddNewInventory",
       nav,
+      grid3,
       errors: null,
     })
   } else {
+    const grid4 = await utilities.builAddInvetory()
     req.flash("notice", "Sorry, the registration failed.")
-    res.status(501).render("./inventory/add-classification", {
-      title: "AddNewInventory",
+    res.status(501).render("./inventory/add-inventory", {
+      title: "Management",
       nav,
+      grid4,
       errors: null,
     })
   }

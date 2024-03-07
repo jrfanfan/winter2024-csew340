@@ -75,7 +75,7 @@ invCont.registerNewClassification = async function(req, res) {
 
   const regResult = await invModel.registerClassification( classification_name )
 
-  if (regResult.lenght > 0) {
+  if (regResult) {
     req.flash(
       "notice",
       `Congratulations, you have added a new name: ${classification_name}`

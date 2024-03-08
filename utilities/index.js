@@ -103,7 +103,7 @@ Util.builAddInvetory =  async function() {
   data.rows.forEach((row) => {
     grid4 += `<li>`
     grid4 += `<option>` 
-    grid4 +=  row.classification_id
+    grid4 += row.classification_name
     grid4 += `</option>`
     grid4 += `</li>`
   })

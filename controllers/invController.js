@@ -107,6 +107,7 @@ invCont.buildByAddInventory = async function(req, res) {
     title: " addInvetory",
     nav,
     grid4,
+    errors: null,
   })
 
 }
@@ -117,7 +118,17 @@ invCont.buildByAddInventory = async function(req, res) {
 invCont.registerNewInventory = async function(req, res) {
   let nav = await utilities.getNav()
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body
-
+  let data = await invModel.getClassifications()
+  let iD;
+  data.rows.forEach((row) => {
+    if (row.classification_name == classification_id) {
+      iD = row.classification_id;
+      return parseInt(iD);
+    }
+  })
+  let price = parseInt(inv_price)
+  let miles = parseInt(inv_miles)
+  console.log(price, miles, iD) 
   const regResult = await invModel.registerInventory(
     inv_make,
     inv_model,
@@ -125,10 +136,10 @@ invCont.registerNewInventory = async function(req, res) {
     inv_description,
     inv_image,
     inv_thumbnail,
-    parseInt(inv_price),
-    parseInt(inv_miles),
+    price,
+    miles,
     inv_color,
-    classification_id
+    iD
   )
 
   if (regResult) {

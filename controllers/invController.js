@@ -28,7 +28,7 @@ invCont.buildByClassificationDetail = async function (req, res) {
   const data = await invModel.getInventoryByClassificationDetail(classification_id)
   const grid2 = await utilities.buildClassificationGrid2(data)
   let nav = await utilities.getNav()
-  const className = data[0].classification_name
+  const className = data[0].inv_make
   res.render("./inventory/classification1", {
     title: className + " vehicles",
     nav,
@@ -128,7 +128,6 @@ invCont.registerNewInventory = async function(req, res) {
   })
   let price = parseInt(inv_price)
   let miles = parseInt(inv_miles)
-  console.log(price, miles, iD) 
   const regResult = await invModel.registerInventory(
     inv_make,
     inv_model,

@@ -98,7 +98,7 @@ Util.builAddInvetory =  async function() {
   let data = await invModel.getClassifications()
   let grid4
   grid4 = `<select id="chooseClassification" name="classification_id" required>`
-  grid4 +=` <option value="">--Choose a Classification--</option>`
+  grid4 +=`<option>--Choose a Classification--</option>`
   grid4 += `<ul>`
   data.rows.forEach((row) => {
     grid4 += `<li>`

@@ -285,7 +285,7 @@ div.desc, div.desc1 {
   border-radius: 5px;
   margin-left: 100px;
 }
-input:valid {
+input, textarea:valid {
   
   background-color: palegreen;
 }

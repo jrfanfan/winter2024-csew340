@@ -29,4 +29,5 @@ router.post(
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
 )
+router.get("/", utilities.handleErrors(accountController.buildNewView))
 module.exports = router

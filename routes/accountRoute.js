@@ -23,11 +23,14 @@ router.post("/register",
   )
 
 // Process the login request
+
+router.get("/", utilities.checkLogin, utilities.handleErrors( accountController.buildNewView))
+
 router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
 )
-router.get("/", utilities.handleErrors(accountController.buildNewView))
+
 module.exports = router

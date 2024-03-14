@@ -365,7 +365,7 @@ input:invalid {
     font-size: 16px;
     margin-left: 200px;
   }
-  .newInventory{
+.newInventory{
     background-color: rgb(19, 158, 223);
     width: 500px;
     margin-left: 140px;
@@ -376,18 +376,22 @@ input:invalid {
     margin-left: 30%;
   }
   
-  #form2 input input:valid {
+#form2 input input:valid {
     height: 26px;
     width: 250px;
     font-size: 16px;
     
   }
-  #form2 label {
+#form2 label {
     display: block;
   }
-  #form2 #description {
+#form2 #description {
     width: 360px;
   }
+#chooseClassification{
+  background-color: #06acee;
+  font-size: 22px;
+}
 
 footer {
   padding-top: 20px;

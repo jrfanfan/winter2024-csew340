@@ -70,6 +70,7 @@ app.use("/account", require("./routes/accountRoute"))
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
   })
+app.use("/js", require("./routes/inventoryRoute"))
 
 
 /* ***********************

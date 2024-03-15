@@ -46,8 +46,8 @@ invCont.buildByManagement = async function (req, res) {
   res.render("./inventory/management", {
     title: "Management",
     nav,
-    classificationSelect,
     errors: null,
+    classificationSelect,
   })
 }
 

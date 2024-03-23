@@ -174,7 +174,7 @@ Util.checkJWTToken = (req, res, next) => {
   let grid5
   const Kookies = Session[0]
   const keys = Object.keys(Kookies)
-  if (keys[1] == "jwt" & keys[0] == "sessionId") {
+  if (keys[1] == "jwt" ) {
     grid5 = "Welcome "
     grid5 += `<a title="Click to log out"  href="http://localhost:5500/">Log Out</a>`
   } else {

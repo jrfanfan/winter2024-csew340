@@ -11,9 +11,11 @@ require("dotenv").config()
 * *************************************** */
 async function buildLogin(req, res, next) {
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   res.render("account/login", {
     title: "Login",
     nav,
+    head,
     errors: null,
   })
 }
@@ -23,9 +25,11 @@ async function buildLogin(req, res, next) {
 * *************************************** */
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   res.render("account/register", {
     title: "Register",
     nav,
+    head,
     errors: null,
   })
 }
@@ -36,6 +40,7 @@ async function buildRegister(req, res, next) {
 * *************************************** */
 async function registerAccount(req, res) {
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   const { account_firstname, account_lastname, account_email, account_password } = req.body
 
   // Hash the password before storing
@@ -48,6 +53,7 @@ async function registerAccount(req, res) {
     res.status(500).render("account/register", {
       title: "Registration",
       nav,
+      head,
       errors: null,
     })
   }
@@ -67,12 +73,14 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      head,
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      head,
     })
   }
 }
@@ -82,6 +90,7 @@ async function registerAccount(req, res) {
  * ************************************ */
 async function accountLogin(req, res) {
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
   if (!accountData) {
@@ -89,8 +98,11 @@ async function accountLogin(req, res) {
    res.status(400).render("account/login", {
     title: "Login",
     nav,
-    errors: null,
+    head,
     account_email,
+    account_password,
+    errors: null,
+    
    })
   return
   }
@@ -114,10 +126,12 @@ async function accountLogin(req, res) {
 *  Deliver login view
 * *************************************** */
 async function buildNewView(req, res, next) {
+  let head = await utilities.buildMessageHead()
   let nav = await utilities.getNav()
   res.render("account/newView", {
     title: "NewView",
     nav,
+    head,
     errors: null,
   })
 }

@@ -11,11 +11,13 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   const className = data[0].classification_name
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
     grid,
+    head,
     errors: null,
   })
 }
@@ -27,12 +29,14 @@ invCont.buildByClassificationDetail = async function (req, res) {
   const classification_id = req.params.classificationId2
   const data = await invModel.getInventoryByClassificationDetail(classification_id)
   const grid2 = await utilities.buildClassificationGrid2(data)
+  const head = await utilities.buildMessageHead()
   let nav = await utilities.getNav()
   const className = data[0].inv_make
   res.render("./inventory/classification1", {
     title: className + " vehicles",
     nav,
     grid2,
+    head,
     errors: null,
   })
 }
@@ -42,12 +46,14 @@ invCont.buildByClassificationDetail = async function (req, res) {
  * ************************** */
 invCont.buildByManagement = async function (req, res) {
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   const classificationSelect = await utilities.builAddInvetory()
   res.render("./inventory/management", {
     title: "Management",
     nav,
     errors: null,
     classificationSelect,
+    head,
   })
 }
 
@@ -56,9 +62,11 @@ invCont.buildByManagement = async function (req, res) {
  * ************************** */
 invCont.buildByAddNewClassification = async function(req, res, next) {
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   res.render("./inventory/add-classification", {
     title: "AddNewClassification",
     nav,
+    head,
     errors: null,
     
   })
@@ -80,9 +88,11 @@ invCont.registerNewClassification = async function(req, res) {
       `Congratulations, you have added a new classification: ${classification_name}`
     )
     let nav = await utilities.getNav()
+    const head = await utilities.buildMessageHead()
     res.status(201).render("./inventory/management", {
       title: "Management",
       nav,
+      head,
       errors: null,
     })
   } else {
@@ -90,6 +100,7 @@ invCont.registerNewClassification = async function(req, res) {
     res.status(501).render("./inventory/site-name/inv", {
       title: "AddNewClassification",
       nav,
+      head,
       errors: null,
 
 
@@ -105,10 +116,12 @@ invCont.registerNewClassification = async function(req, res) {
 invCont.buildByAddInventory = async function(req, res) {
   const grid4 = await utilities.builAddInvetory()
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   res.render("./inventory/add-inventory", {
     title: " addInvetory",
     nav,
     grid4,
+    head,
     errors: null,
   })
 
@@ -119,6 +132,7 @@ invCont.buildByAddInventory = async function(req, res) {
 * *************************************** */
 invCont.registerNewInventory = async function(req, res) {
   let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body
   let data = await invModel.getClassifications()
   let iD;
@@ -152,6 +166,7 @@ invCont.registerNewInventory = async function(req, res) {
     res.status(201).render("./inventory/management", {
       title: "AddNewInventory",
       nav,
+      head,
       errors: null,
     })
   } else {
@@ -161,6 +176,7 @@ invCont.registerNewInventory = async function(req, res) {
       title: "Management",
       nav,
       grid4,
+      head,
       errors: null,
     })
   }

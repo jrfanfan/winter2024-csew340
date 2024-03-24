@@ -130,8 +130,7 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
-const Session = []
-let ds = new Set()
+let loggout
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
    jwt.verify(
@@ -143,6 +142,7 @@ Util.checkJWTToken = (req, res, next) => {
       res.clearCookie("jwt")
       return res.redirect("/account/login")
      }
+     
      res.locals.accountData = accountData
      res.locals.loggedin = 1
      next()
@@ -150,37 +150,38 @@ Util.checkJWTToken = (req, res, next) => {
   } else {
    next()
   }
-  
-  const q = ('Cookies: ', req.cookies)
-  Session.push(q)
-
+  loggout = res.clearCookie("jwt")
 }
 
  /* ****************************************
  *  Check Login
  * ************************************ */
+let loggin
  Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
     res.redirect("/inv/")
-    next()
-    
+    return loggin = "logg"
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
  }
 
- Util.buildMessageHead = async function(req, res) {
-  let grid5
-  const Kookies = Session[0]
-  const keys = Object.keys(Kookies)
-  if (keys[0] === "sessionId" & keys[1] == "jwt" ) {
-    grid5 = "Welcome "
-    grid5 += `<a title="Click to log out"  href="http://localhost:5500/">Log Out</a>`
-  } else {
-    grid5 = `<a title="Click to log in" href="/account/">My Account</a>`
+ Util.buildMessageHead = (req, res, next) =>{
+  function clear() {
+    sessionStorage.removeItem("key")
+    sessionStorage.clear()
+    
   }
-  console.log()
+  let grid5
+  switch(loggin) {
+    case "logg":
+      grid5 = `<a title="Click to log out" action="${loggout}" href="/">Log Out</a>`    
+      break;
+    default:
+      grid5 = `<a title="Click to log in" href="/account/">My Account</a>`
+  } 
+  
   return grid5
 }
 

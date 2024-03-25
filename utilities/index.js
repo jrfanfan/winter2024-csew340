@@ -132,6 +132,8 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 * Middleware to check token validity
 **************************************** */
 let loggout
+let name = ""
+let type = ""
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
    jwt.verify(
@@ -143,8 +145,10 @@ Util.checkJWTToken = (req, res, next) => {
       res.clearCookie("jwt")
       return res.redirect("/account/login")
      }else if(accountData) {
-      console.log(accountData.account_firstname)
+      type = accountData.account_type
+      name = accountData.account_firstname
       loggout = res.clearCookie("jwt")
+      console.log(type)
       
      }
      res.locals.accountData = accountData
@@ -163,7 +167,17 @@ Util.checkJWTToken = (req, res, next) => {
 let loggin
  Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
-    res.redirect("/inv/")
+    switch(type) {
+      case "Client":
+        res.redirect("/")
+        break;
+      case "Employee":
+        res.redirect("/inv/")
+        break;
+      default:
+        res.redirect("/inv/")
+    } 
+    
     return loggin = "logg"
   } else {
     req.flash("notice", "Please log in.")
@@ -174,8 +188,8 @@ let loggin
  Util.buildMessageHead = (req, res, next) =>{
   let grid5
   if (loggin) {
-    grid5 = "Welcome  " + "/ " 
-    grid5 += `<a title="Click to log out" action="${loggout}" href="/">Log Out</a>`
+    grid5 = "Welcome  " + name + "/ "
+    grid5 += `<a title="Click to log out" target="${loggout}" action="${loggout}" href="/account/">Log Out</a>`
 
   }else {
     grid5 = `<a title="Click to log in" href="/account/">My Account</a>`

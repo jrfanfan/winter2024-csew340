@@ -126,7 +126,7 @@ async function accountLogin(req, res) {
 *  Deliver login view
 * *************************************** */
 async function buildNewView(req, res, next) {
-  let head = await utilities.buildMessageHead()
+  const head = await utilities.buildMessageHead()
   let nav = await utilities.getNav()
   res.render("account/newView", {
     title: "NewView",

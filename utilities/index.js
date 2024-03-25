@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const { clearCache } = require("ejs")
-const { reset } = require("nodemon")
 require("dotenv").config()
 const Util = {}
 
@@ -131,8 +130,8 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
-let loggout
-let name = ""
+let logout = false
+let name = "" 
 let type = ""
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
@@ -144,13 +143,14 @@ Util.checkJWTToken = (req, res, next) => {
       req.flash("Please log in")
       res.clearCookie("jwt")
       return res.redirect("/account/login")
-     }else if(accountData) {
-      type = accountData.account_type
+     }else if (accountData) {
       name = accountData.account_firstname
-      loggout = res.clearCookie("jwt")
-      console.log(type)
+      type = accountData.account_type
+      if (true) {
+        logout = res.clearCookie("jwt")
+      }
+    }
       
-     }
      res.locals.accountData = accountData
      res.locals.loggedin = 1
      next()
@@ -177,7 +177,6 @@ let loggin
       default:
         res.redirect("/inv/")
     } 
-    
     return loggin = "logg"
   } else {
     req.flash("notice", "Please log in.")
@@ -187,15 +186,18 @@ let loggin
 
  Util.buildMessageHead = (req, res, next) =>{
   let grid5
-  if (loggin) {
-    grid5 = "Welcome  " + name + "/ "
-    grid5 += `<a title="Click to log out" target="${loggout}" action="${loggout}" href="/account/">Log Out</a>`
-
-  }else {
-    grid5 = `<a title="Click to log in" href="/account/">My Account</a>`
-  }
-
+  switch(loggin) {
+    case "logg":
+      grid5 = "Welcome  " + name + "/ "
+      grid5 += `<a title="Click to log out"  onclick="${logout}" href="/">Log Out</a>`    
+      break;
+    default:
+      grid5 = `<a title="Click to log in" href="/account/">My Account</a>`
+  } 
+  
   return grid5
 }
+
+
 
 module.exports = Util

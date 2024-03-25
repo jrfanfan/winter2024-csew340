@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const { clearCache } = require("ejs")
+const { reset } = require("nodemon")
 require("dotenv").config()
 const Util = {}
 
@@ -141,8 +142,10 @@ Util.checkJWTToken = (req, res, next) => {
       req.flash("Please log in")
       res.clearCookie("jwt")
       return res.redirect("/account/login")
+     }else if(accountData) {
+      loggout = res.clearCookie("jwt")
+      reset()
      }
-     
      res.locals.accountData = accountData
      res.locals.loggedin = 1
      next()
@@ -150,7 +153,7 @@ Util.checkJWTToken = (req, res, next) => {
   } else {
    next()
   }
-  loggout = res.clearCookie("jwt")
+  
 }
 
  /* ****************************************
@@ -168,24 +171,16 @@ let loggin
  }
 
  Util.buildMessageHead = (req, res, next) =>{
-  function clear() {
-    sessionStorage.removeItem("key")
-    sessionStorage.clear()
-    
-  }
   let grid5
-  switch(loggin) {
-    case "logg":
-      grid5 = `<a title="Click to log out" action="${loggout}" href="/">Log Out</a>`    
-      break;
-    default:
-      grid5 = `<a title="Click to log in" href="/account/">My Account</a>`
-  } 
-  
+  if (loggin) {
+    grid5 = "Welcome  " + "/ " 
+    grid5 += `<a title="Click to log out" action="${loggout}" href="/">Log Out</a>`
+
+  }else {
+    grid5 = `<a title="Click to log in" href="/account/">My Account</a>`
+  }
+
   return grid5
 }
-
-
-
 
 module.exports = Util

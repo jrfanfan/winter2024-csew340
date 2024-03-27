@@ -1,13 +1,9 @@
-'use strict'
-const { getClassifications } = require("../../models/inventory-model")
-
- 
+'use strict' 
  
  // Get a list of items in inventory based on the classification_id 
  let classificationList = document.querySelector("#chooseClassification")
  classificationList.addEventListener("change", function () { 
   let classification_id = classificationList.value 
-  let idData = getClassifications()
   console.log(`classification_id is: ${classification_id}`) 
   let classIdURL = "/inv/getInventory/"+classification_id 
   fetch(classIdURL) 

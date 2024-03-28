@@ -110,7 +110,7 @@ Util.builAddInvetory =  async function() {
   grid4 += `<ul>`
   data.rows.forEach((row) => {
     grid4 += `<li>`
-    grid4 += `<option value="${row.classification_id}">` 
+    grid4 += `<option>` 
     grid4 += row.classification_name
     grid4 += `</option>`
     grid4 += `</li>`
@@ -120,6 +120,23 @@ Util.builAddInvetory =  async function() {
   return grid4
 }
 
+Util.buildClassificationList  =  async function() {
+  let data = await invModel.getClassifications()
+  let grid5
+  grid5 = `<select id="chooseClassification" name="classification_id" required>`
+  grid5 +=`<option>--Choose a Classification--</option>`
+  grid5 += `<ul>`
+  data.rows.forEach((row) => {
+    grid5 += `<li>`
+    grid5 += `<option value="${row.classification_id}">` 
+    grid5 += row.classification_name
+    grid5 += `</option>`
+    grid5 += `</li>`
+  })
+  grid5 += `</ul>`
+  grid5 += `</select> <br>`
+  return grid5
+}
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
@@ -185,17 +202,17 @@ let loggin
  }
 
  Util.buildMessageHead = (req, res, next) =>{
-  let grid5
+  let grid6
   switch(loggin) {
     case "logg":
-      grid5 = "Welcome  " + name + "/ "
-      grid5 += `<a title="Click to log out"  onclick="${logout}" href="/">Log Out</a>`    
+      grid6 = "Welcome  " + name + "/ "
+      grid6 += `<a title="Click to log out"  onclick="${logout}" href="/">Log Out</a>`    
       break;
     default:
-      grid5 = `<a title="Click to log in" href="/account/">My Account</a>`
+      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
   } 
   
-  return grid5
+  return grid6
 }
 
 

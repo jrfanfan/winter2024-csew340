@@ -29,6 +29,8 @@ router.post(
   regValidate.checkRegData,
   utilities.handleErrors(invController.registerNewInventory)
 )
-
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+// Modify item
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
 module.exports = router;

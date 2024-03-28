@@ -1,36 +1,36 @@
-<h1> Edit <%- itemName %> </h1>
+<h1> Edit Inventory <%- itemName %></h1>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 <%- messages() %>
 <div class="newInventory">
     <h2> All field required</h2>
     <div id="form">
-        <form id="form2" action="/inv/update" method="get" >
+        <form id="form2" action="/inv/update" method="post" >
             <label for="chooseClassification">Classification</label>
-            <% if (errors) { %>
-                <ul class="notice">
-               <% errors.array().forEach(error => { %>
-                 <li><%= error.msg %></li>
-              <%  }) %>
-               </ul>
-              <% } %>
-            <%- classificationSelect %>
+            <%- classificationSelect %> 
             <label for="invMake">Make</label>
-            <input type="text" id="inv_make"  name="inv_make"  minlength="3" placeholder="Min of 3 characters" required><br>
+            <input type="text" id="invMake"  name="inv_make" value="<%- inv_make %>"   minlength="3" placeholder="Min of 3 characters" required><br>
             <label for="invModel">Model</label>
-            <input type="text" id="invModel" name="inv_model"   minlength="3" placeholder="Min of 3 characters" required>
+            <input type="text" id="invModel" name="inv_model" value="<%- inv_model %>"  minlength="3" placeholder="Min of 3 characters" required>
             <label for="invDesc">Description</label>
-            <textarea id="invDesc" name="inv_description" rows="4" cols="50" required></textarea>
+            <textarea id="invDesc" type="text" name="inv_description"  rows="5" cols="50" required><%- inv_description %></textarea>
             <label for="invImage">Image Path</label>
-            <input type="text" id="invImage" name="inv_image" value="/images/vehicles/no-image.png" placeholder="/images/vehicles/no-image.png">
+            <input type="text" id="invImage" name="inv_image" value="<%- inv_image %>" placeholder="/images/vehicles/no-image.png">
             <label for="invImageThumbnail">Thumbnail Path</label>
-            <input type="text" id="invImageThumbnail" name="inv_thumbnail" value="/images/vehicles/no-image-tn.png" placeholder="/images/vehicles/no-image.png">
+            <input type="text" id="invImageThumbnail" name="inv_thumbnail" value=" <%- inv_thumbnail %>" placeholder="/images/vehicles/no-image.png">
             <label for="invPrice">Price</label>
-            <input type="text" id="invPrice" name="inv_price" pattern="[0-9]*[.,]?[0-9]*"  placeholder="Decimal or integer" required>
+            <input type="text" id="invPrice" name="inv_price" value="<%- inv_price %>" pattern="[0-9]*[.,]?[0-9]*"  placeholder="Decimal or integer" required>
             <label for="miles">Miles</label>
-            <input type="text" id="miles" name="inv_miles" required>
+            <input type="text" id="miles" name="inv_miles" value="inv_miles" required>
             <label for="invYear">Year</label>
-            <input type="text" id="invYear" name="inv_year" minlength="4"  maxlength="4" placeholder="4-digit Year" required>
+            <input type="text" id="invYear" name="inv_year" value="<%- inv_year %>" minlength="4"  maxlength="4" placeholder="4-digit Year" required>
             <label for="invColor">Color</label>
-            <input type="text" id="invColor" name="inv_color"  minlength="3" required><br>
+            <input type="text" id="invColor" name="inv_color" value="<%- inv_color %>" minlength="3" required><br>
             <button class="favorite styled"  style="margin-left:300px;"  type="submit">Update Vehicle</button><br><br>`
         </form>
     </div>

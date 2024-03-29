@@ -120,6 +120,10 @@ Util.builAddInvetory =  async function() {
   return grid4
 }
 
+/* **************************************
+* Build management edit or delete list vehicle view HTML
+* ************************************ */
+
 Util.buildClassificationList  =  async function() {
   let data = await invModel.getClassifications()
   let grid5
@@ -137,6 +141,8 @@ Util.buildClassificationList  =  async function() {
   grid5 += `</select> <br>`
   return grid5
 }
+
+
 
 Util.getClassificationName  =  async function(classification_id) {
   let data = await invModel.getClassifications()

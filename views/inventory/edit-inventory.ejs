@@ -26,12 +26,13 @@
             <label for="invPrice">Price</label>
             <input type="text" id="invPrice" name="inv_price" value="<%- inv_price %>" pattern="[0-9]*[.,]?[0-9]*"  placeholder="Decimal or integer" required>
             <label for="miles">Miles</label>
-            <input type="text" id="miles" name="inv_miles" value="inv_miles" required>
+            <input type="text" id="miles" name="inv_miles" value="<%- inv_miles %>" required>
             <label for="invYear">Year</label>
             <input type="text" id="invYear" name="inv_year" value="<%- inv_year %>" minlength="4"  maxlength="4" placeholder="4-digit Year" required>
             <label for="invColor">Color</label>
             <input type="text" id="invColor" name="inv_color" value="<%- inv_color %>" minlength="3" required><br>
             <button class="favorite styled"  style="margin-left:300px;"  type="submit">Update Vehicle</button><br><br>`
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
         </form>
     </div>
 </div>

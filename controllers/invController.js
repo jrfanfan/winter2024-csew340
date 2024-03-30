@@ -319,14 +319,11 @@ invCont.updateInventory = async function (req, res, next) {
 invCont.deleteView =async function (req, res, nest) {
   const inv_id = parseInt(req.params.inv_id)
   let nav = await utilities.getNav()
-  const head = await utilities.buildMessageHead()
   const itemData = await invModel.getInventoryByClassificationDetail(inv_id)
   const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
   res.render("./inventory/delete-confirm", {
     title: "Delete" + itemName,
     nav,
-    head,
-    itemName,
     errors: null,
     inv_id: itemData[0].inv_id,
     inv_make: itemData[0].inv_make,

@@ -1,3 +1,11 @@
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+<%- messages() %>
 <h1> <%- itemName %></h1>
 <div class="newInventory">
     <h5 style="color: red;"> Confirm Deletion - The deletion is permanent. </h5>

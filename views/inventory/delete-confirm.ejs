@@ -1,0 +1,19 @@
+<h1> <%- itemName %></h1>
+<div class="newInventory">
+    <h5 style="color: red;"> Confirm Deletion - The deletion is permanent. </h5>
+    <div id="form">
+        <form id="form2" action="/inv/delete" method="post" >
+            <label for="chooseClassification">Classification</label>
+            <label for="invMake">Make</label>
+            <input type="text" readonly <% if(locals.inv_make) {%> value="<%= locals.inv_make %> "<% } %>><br>
+            <label for="invModel">Model</label>
+            <input type="text" readonly <% if(locals.inv_model) {%> value="<%= locals.inv_model %> "<% } %>>
+            <label for="invPrice">Price</label>
+            <input type="text" readonly <% if(locals.inv_price) {%> value="<%= locals.inv_price %> "<% } %>>
+            <label for="invYear">Year</label>
+            <input type="text" <% if(locals.inv_year) {%> value="<%= locals.inv_year %> "<% } %>>
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) {%> value="<%= locals.inv_id %> "<% } %>><br>
+            <button class="favorite styled"  style="margin-left:300px;"  type="submit">Delete Item</button><br><br>`
+        </form>
+    </div>
+</div>

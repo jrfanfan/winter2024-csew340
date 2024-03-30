@@ -41,5 +41,8 @@ router.post(
   regValidate.checkUpdateData,
   utilities.handleErrors(invController.registerNewInventory)
 )
+// Process delete item
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteView))
+router.post("/delete/", utilities.handleErrors(invController.deleteItem))
 
 module.exports = router;

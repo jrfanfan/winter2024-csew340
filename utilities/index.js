@@ -186,6 +186,9 @@ Util.checkLogin = (req, res, next) => {
  /* ****************************************
 * Middleware to check token validity
 **************************************** */
+let name = ""
+let type = ""
+
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
    jwt.verify(
@@ -196,7 +199,12 @@ Util.checkJWTToken = (req, res, next) => {
       req.flash("Please log in")
       res.clearCookie("jwt")
       return res.redirect("/account/login")
-     }
+     }else if (accountData) {
+      name = accountData.account_firstname
+      type = accountData.account_type
+      console.log(name)
+    }
+
      res.locals.accountData = accountData
      res.locals.loggedin = 1
      next()
@@ -208,7 +216,12 @@ Util.checkJWTToken = (req, res, next) => {
 
  Util.buildMessageHead = (req, res, next) =>{
   let grid6
-  grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
+  if (name) {
+    grid6 = "Welcome " + name + `<br>`
+    grid6 += `<a title="Click to log out" href="/"> Log Out </a>`
+
+  } else {grid6 = `<a title="Click to log in" href="/account/">My Account</a>`}
+  
   
   
   return grid6

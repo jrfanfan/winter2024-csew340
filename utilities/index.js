@@ -172,10 +172,20 @@ Util.getClassificationName  =  async function(classification_id) {
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 /* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
+ /* ****************************************
 * Middleware to check token validity
 **************************************** */
-let name = "" 
-let type = ""
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
    jwt.verify(
@@ -186,13 +196,7 @@ Util.checkJWTToken = (req, res, next) => {
       req.flash("Please log in")
       res.clearCookie("jwt")
       return res.redirect("/account/login")
-     }else if (accountData) {
-      name = accountData.account_firstname
-      type = accountData.account_type
-     
-    
-    }
-      
+     }
      res.locals.accountData = accountData
      res.locals.loggedin = 1
      next()
@@ -200,42 +204,12 @@ Util.checkJWTToken = (req, res, next) => {
   } else {
    next()
   }
-  
-}
-
- /* ****************************************
- *  Check Login
- * ************************************ */
-let loggin
- Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin) {
-    switch(type) {
-      case "Client":
-        res.redirect("/")
-        break;
-      case "Employee":
-        res.redirect("/inv/")
-        break;
-      default:
-        res.redirect("/inv/")
-    } 
-    return loggin = "logg"
-  } else {
-    req.flash("notice", "Please log in.")
-    return res.redirect("/account/login")
-  }
  }
 
  Util.buildMessageHead = (req, res, next) =>{
   let grid6
-  switch(loggin) {
-    case "logg":
-      grid6 = "Welcome  " + name + "/ "
-      grid6 += `<a title="Click to log out"  onclick="${logout()}" href="/">Log Out</a>`    
-      break;
-    default:
-      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
-  } 
+  grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
+  
   
   return grid6
 }

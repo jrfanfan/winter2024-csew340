@@ -174,8 +174,12 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 /* ****************************************
  *  Check Login
  * ************************************ */
+let name = ""
+let type = ""
+let check = ""
 Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin) {
+  if (res.locals.loggedin) { 
+    check = "yes"
     next()
   } else {
     req.flash("notice", "Please log in.")
@@ -183,11 +187,27 @@ Util.checkLogin = (req, res, next) => {
   }
  }
 
+ Util.buildMessageHead = (req, res, next) =>{
+  let grid6
+  switch (check) {
+    case "yes":
+      grid6 = "Welcome " + name + `<br>`
+      grid6 += `<a title="Click to log out" onclick="${Logout = "no", Util.checkJWTToken}" href="/"> Log Out </a>`
+      break;
+  
+    default:
+      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
+      break;
+  }
+  
+  return grid6
+}
+
+
+
  /* ****************************************
 * Middleware to check token validity
 **************************************** */
-let name = ""
-let type = ""
 
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
@@ -199,10 +219,12 @@ Util.checkJWTToken = (req, res, next) => {
       req.flash("Please log in")
       res.clearCookie("jwt")
       return res.redirect("/account/login")
-     }else if (accountData) {
+     }else if(check == "no") {
+      res.clearCookie("jwt")
+      }else if (accountData) {
       name = accountData.account_firstname
       type = accountData.account_type
-      console.log(name)
+      
     }
 
      res.locals.accountData = accountData
@@ -213,20 +235,6 @@ Util.checkJWTToken = (req, res, next) => {
    next()
   }
  }
-
- Util.buildMessageHead = (req, res, next) =>{
-  let grid6
-  if (name) {
-    grid6 = "Welcome " + name + `<br>`
-    grid6 += `<a title="Click to log out" href="/"> Log Out </a>`
-
-  } else {grid6 = `<a title="Click to log in" href="/account/">My Account</a>`}
-  
-  
-  
-  return grid6
-}
-
 
 
 module.exports = Util

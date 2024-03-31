@@ -174,10 +174,6 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
-function logout(req, res) {
-  let x
-  
-}
 let name = "" 
 let type = ""
 Util.checkJWTToken = (req, res, next) => {
@@ -193,7 +189,7 @@ Util.checkJWTToken = (req, res, next) => {
      }else if (accountData) {
       name = accountData.account_firstname
       type = accountData.account_type
-      x = res.clearCookie("jwt")
+     
     
     }
       

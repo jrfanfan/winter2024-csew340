@@ -45,4 +45,8 @@ router.post(
 router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteView))
 router.post("/delete/", utilities.handleErrors(invController.deleteItem))
 
+router.get("/management-2", utilities.handleErrors(invController.buildByManagement2));
+
+
+
 module.exports = router;

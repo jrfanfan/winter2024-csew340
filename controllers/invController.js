@@ -46,9 +46,25 @@ invCont.buildByClassificationDetail = async function (req, res) {
  * ************************** */
 invCont.buildByManagement = async function (req, res) {
   let nav = await utilities.getNav()
-  const head = await utilities.buildMessageHead()
-  const classificationSelect = await utilities.buildClassificationList()
+  let head = await utilities.buildMessageHead()
+  let Client = await utilities.buildTypeView()
+
+  let classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
+    title: "Management",
+    nav,
+    errors: null,
+    classificationSelect,
+    head,
+    Client,
+  })
+}
+
+invCont.buildByManagement2 = async function (req, res) {
+  let nav = await utilities.getNav()
+  let head = await utilities.buildMessageHead()
+  let classificationSelect = await utilities.buildClassificationList()
+  res.render("./inventory/management-2", {
     title: "Management",
     nav,
     errors: null,
@@ -56,6 +72,7 @@ invCont.buildByManagement = async function (req, res) {
     head,
   })
 }
+
 
 /* ***************************
  *  Build add new classification view
@@ -77,7 +94,6 @@ invCont.buildByAddNewClassification = async function(req, res, next) {
 *  Process Registration new classification
 * *************************************** */
 invCont.registerNewClassification = async function(req, res) {
-  
   const { classification_name} = req.body
   const data = await invModel.getClassifications()
   const regResult = await invModel.registerClassification( classification_name )

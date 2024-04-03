@@ -135,4 +135,53 @@ async function buildNewView(req, res, next) {
     errors: null,
   })
 }
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildNewView}
+
+async function buildEditAccountView(req, res, next) {
+  const account_id = parseInt(req.params.account_id)
+  let nav = await utilities.getNav()
+  const head = await utilities.buildMessageHead()
+  const itemData = await accountModel.getAccountById(account_id)
+  res.render("./account/register-edit", {
+      title: "Edit Registration",
+      nav,
+      head,
+      errors: null,
+      account_firstname: itemData[0].account_firstname,
+      account_lastname: itemData[0].account_lastname,
+      account_email: itemData[0].account_email,
+      account_password: itemData[0].account_password,
+      account_id: itemData[0].account_id,
+    
+    })
+  }
+
+  /* ***************************
+ *  Update register Data
+ * ************************** */
+async function updateRegister (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_password
+  } = req.body
+  const updateResult = await accountModel.updateRegister(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_password
+  )
+  if (updateResult) {
+    const itemName = updateResult.account_firstname + " " + updateResult.account_lastname
+    req.flash("notice", `The account of ${itemName} was successfully updated.`)
+    res.redirect("/inv/")
+  }else {
+    req.flash("notice", "Sorry, the insert failed.") 
+    } 
+  
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildNewView, buildEditAccountView, updateRegister}

@@ -1,4 +1,4 @@
-<h1> Vehicle Management </h1>
+<h1> Account Management </h1>
 <% if (errors) { %>
     <ul class="notice">
    <% errors.array().forEach(error => { %>
@@ -7,13 +7,8 @@
    </ul>
   <% } %>
 <%- messages() %>
-<p id="demo"></p>
 <div class = "management">
-<a href="/../inv/add-classification">Add New Classification </a> <br><br>
-<a href="/../inv/add-inventory">Add New Vehicle</a>
-<h2>Manage Inventory</h2>
-<p style="font-size: 24px;">Select a classification from the list below to see the items belonging to the classification.</p>
-<%- classificationSelect %>
+<%- Client %>
 <table id="inventoryDisplay"></table>
 <noscript>JavaScript must be enabled to use this page.</noscript>
 <script src="../../js/inventory.js"></script>

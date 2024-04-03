@@ -177,32 +177,16 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 let name = ""
 let type = ""
 let check = ""
+let account_id 
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) { 
     check = "yes"
-    next()
+      next()
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
  }
-
- Util.buildMessageHead = (req, res, next) =>{
-  let grid6
-  switch (check) {
-    case "yes":
-      grid6 = "Welcome " + name + `<br>`
-      grid6 += `<a title="Click to log out" onclick="${Logout = "no", Util.checkJWTToken}" href="/"> Log Out </a>`
-      break;
-  
-    default:
-      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
-      break;
-  }
-  
-  return grid6
-}
-
 
 
  /* ****************************************
@@ -215,16 +199,23 @@ Util.checkJWTToken = (req, res, next) => {
     req.cookies.jwt,
     process.env.ACCESS_TOKEN_SECRET,
     function (err, accountData) {
-     if (err) {
-      req.flash("Please log in")
-      res.clearCookie("jwt")
-      return res.redirect("/account/login")
-     }else if(check == "no") {
-      res.clearCookie("jwt")
+      if(err) {
+        req.flash("Please log in")
+        res.clearCookie("jwt")
+        return res.redirect("/account/login")
       }else if (accountData) {
-      name = accountData.account_firstname
-      type = accountData.account_type
-      
+        name = accountData.account_firstname
+        type = accountData.account_type
+        account_id =accountData.account_id
+        switch (account_id) {
+          case 0:
+            res.clearCookie("jwt")
+            break;
+        
+          default:
+            break;
+        }
+        
     }
 
      res.locals.accountData = accountData
@@ -235,6 +226,57 @@ Util.checkJWTToken = (req, res, next) => {
    next()
   }
  }
+
+Util.buildTypeView = async function (req, res, next) {
+  let grid7
+  switch(type) {
+    case "Client":
+      grid7 = `<h2>`
+      grid7 += `Welcome  ` + name + `<br>`
+      grid7 += `</h2>`
+      grid7 += `<h2> You're logged in.</h2>`
+      grid7 += `<a href="/account/regEdit/${parseInt(account_id)}" style="font-size: 16px; margin-left: 0px;" >Edit Account Information</a>`
+      return grid7
+    
+    case "Employee":
+      grid7 = `<h2>`
+      grid7 += `Welcome  ` + name + `<br>`
+      grid7 += `</h2>`
+      grid7 += `<h2> You're logged in.</h2>`
+      grid7 += `<a href="/account/regEdit/${parseInt(account_id)}" style="font-size: 16px; margin-left: 0px;" >Edit Account Information</a>`
+      grid7 += `<h2>Inventory Management</h2>`
+      grid7 += `<a href="/../inv/management-2" style="font-size: 16px; margin-left: 0px">Manage Inventory</a>`
+      return grid7
+    default:
+      grid7 = `<h2>`
+      grid7 += `Welcome  ` + name + `<br>`
+      grid7 += `</h2>`
+      grid7 += `<h2> You're logged in.</h2>`
+      grid7 += `<a href="/account/regEdit/${parseInt(account_id)}" style="font-size: 16px; margin-left: 0px;" >Edit Account Information</a>`
+      grid7 += `<h2>Inventory Management</h2>`
+      grid7 += `<a href="/../inv/management-2" style="font-size: 16px; margin-left: 0px">Manage Inventory</a>`
+      return grid7
+
+ 
+  } 
+  
+} 
+ 
+ Util.buildMessageHead = () =>{
+  let grid6
+  switch (check) {
+    case "yes":
+      grid6 = "Welcome " + name + `<br>`
+      grid6 += `<a title="Click to log out" onclick=""  href="/"> Log Out </a>`
+      break;
+  
+    default:
+      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
+      break;
+  }
+  
+  return grid6
+}
 
 
 module.exports = Util

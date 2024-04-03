@@ -33,5 +33,14 @@ router.post(
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
 )
+router.get("/regEdit/:account_id", utilities.handleErrors(accountController.buildEditAccountView));
+// Process the edit data
+router.post('/register-edit', utilities.handleErrors(accountController.updateRegister))
+router.post(
+  "/register-edit",
+  regValidate.registationRules,
+  regValidate.checkRegData,
+  utilities.handleErrors(accountController.updateRegister)
+)
 
 module.exports = router

@@ -179,7 +179,7 @@ async function updateRegister (req, res, next) {
     req.flash("notice", `The account of ${itemName} was successfully updated.`)
     res.redirect("/inv/")
   }else {
-    req.flash("notice", "Sorry, the insert failed.") 
+    req.flash("notice", "Sorry, the update failed, start over please") 
     } 
   
 }

@@ -180,7 +180,7 @@ let check = ""
 let account_id 
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) { 
-    check = "yes"
+     check = "yes"
       next()
   } else {
     req.flash("notice", "Please log in.")
@@ -207,20 +207,14 @@ Util.checkJWTToken = (req, res, next) => {
         name = accountData.account_firstname
         type = accountData.account_type
         account_id =accountData.account_id
-        switch (account_id) {
-          case 0:
-            res.clearCookie("jwt")
-            break;
-        
-          default:
-            break;
-        }
-        
-    }
-
-     res.locals.accountData = accountData
-     res.locals.loggedin = 1
-     next()
+        if(check === "no") {res.clearCookie("jwt")}
+       
+      }
+      
+      res.locals.accountData = accountData
+      res.locals.loggedin = 1
+      next()          
+          
     })
   } else {
    next()
@@ -267,16 +261,18 @@ Util.buildTypeView = async function (req, res, next) {
   switch (check) {
     case "yes":
       grid6 = "Welcome " + name + `<br>`
-      grid6 += `<a title="Click to log out" onclick=""  href="/"> Log Out </a>`
-      break;
-  
+      grid6 += `<a title="Click to log out" onclick="${check = 'no'} "  href="/" > Log Out </a>`
+      return grid6
+    case "no":
+      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
+      return grid6
     default:
       grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
-      break;
+      return grid6
+
   }
   
-  return grid6
+ 
 }
-
 
 module.exports = Util

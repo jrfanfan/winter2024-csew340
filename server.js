@@ -78,7 +78,7 @@ app.use("/js", require("./routes/inventoryRoute"))
 * Express Error Handler
 * Place after all other middleware
 *************************/
-app.use(async (err, req, res, next) => {
+app.use(async (err, req, res, check, next) => {
   let nav = await utilities.getNav()
   const head = await utilities.buildMessageHead()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
@@ -86,7 +86,8 @@ app.use(async (err, req, res, next) => {
     title: err.status || 'Server Error',
     message: err.message,
     nav,
-    head
+    head,
+    check
   })
 })
 

@@ -1,4 +1,11 @@
 <h1>Add New Classification </h1>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 <%- messages() %>
 <% if (errors) { %>
     <ul class="notice">

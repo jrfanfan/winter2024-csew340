@@ -198,8 +198,8 @@ Util.checkJWTToken = (req, res, next) => {
    jwt.verify(
     req.cookies.jwt,
     process.env.ACCESS_TOKEN_SECRET,
-    function (err, accountData) {
-      if(err) {
+    function (check, accountData) {
+      if(check == "no") {
         req.flash("Please log in")
         res.clearCookie("jwt")
         return res.redirect("/account/login")
@@ -261,7 +261,7 @@ Util.buildTypeView = async function (req, res, next) {
   switch (check) {
     case "yes":
       grid6 = "Welcome " + name + `<br>`
-      grid6 += `<a title="Click to log out" onclick="${check = 'no'} "  href="/" > Log Out </a>`
+      grid6 += `<a title="Click to log out" onclick="check = 'no' "  href="/" > Log Out </a>`
       return grid6
     case "no":
       grid6 = `<a title="Click to log in" href="/account/">My Account</a>`

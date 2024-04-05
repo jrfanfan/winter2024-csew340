@@ -177,15 +177,16 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 let name = ""
 let type = ""
 let check = ""
+
 let account_id 
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) { 
-     check = "yes"
-      next()
+     next()
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
+  
  }
 
 
@@ -198,8 +199,8 @@ Util.checkJWTToken = (req, res, next) => {
    jwt.verify(
     req.cookies.jwt,
     process.env.ACCESS_TOKEN_SECRET,
-    function (check, accountData) {
-      if(check == "no") {
+    function (err, accountData) {
+      if(err) {
         req.flash("Please log in")
         res.clearCookie("jwt")
         return res.redirect("/account/login")
@@ -207,16 +208,16 @@ Util.checkJWTToken = (req, res, next) => {
         name = accountData.account_firstname
         type = accountData.account_type
         account_id =accountData.account_id
-        if(check === "no") {res.clearCookie("jwt")}
-       
+        check = "yes"
+      }else if(check === "no") {
+        res.clearCookie("jwt")
       }
-      
       res.locals.accountData = accountData
       res.locals.loggedin = 1
-      next()          
-          
+      next()  
+                
     })
-  } else {
+  }else {
    next()
   }
  }
@@ -231,7 +232,6 @@ Util.buildTypeView = async function (req, res, next) {
       grid7 += `<h2> You're logged in.</h2>`
       grid7 += `<a href="/account/regEdit/${parseInt(account_id)}" style="font-size: 16px; margin-left: 0px;" >Edit Account Information</a>`
       return grid7
-    
     case "Employee":
       grid7 = `<h2>`
       grid7 += `Welcome  ` + name + `<br>`
@@ -250,23 +250,22 @@ Util.buildTypeView = async function (req, res, next) {
       grid7 += `<h2>Inventory Management</h2>`
       grid7 += `<a href="/../inv/management-2" style="font-size: 16px; margin-left: 0px">Manage Inventory</a>`
       return grid7
-
- 
   } 
   
 } 
- 
+
+
  Util.buildMessageHead = () =>{
   let grid6
   switch (check) {
     case "yes":
       grid6 = "Welcome " + name + `<br>`
-      grid6 += `<a title="Click to log out" onclick="check = 'no' "  href="/" > Log Out </a>`
+      grid6 += `<a title="Click to log out" onclick="${check="no"}"  href="/" > Log Out </a>`
       return grid6
     case "no":
       grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
       return grid6
-    default:
+    case "out":
       grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
       return grid6
 

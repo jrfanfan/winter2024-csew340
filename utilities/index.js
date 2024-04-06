@@ -181,6 +181,7 @@ let check = ""
 let account_id 
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) { 
+    check = "yes"
      next()
   } else {
     req.flash("notice", "Please log in.")
@@ -204,13 +205,14 @@ Util.checkJWTToken = (req, res, next) => {
         req.flash("Please log in")
         res.clearCookie("jwt")
         return res.redirect("/account/login")
-      }else if (accountData) {
-        name = accountData.account_firstname
-        type = accountData.account_type
-        account_id =accountData.account_id
-        check = "yes"
-      }else if(check === "no") {
-        res.clearCookie("jwt")
+      }else {
+            name = accountData.account_firstname
+            type = accountData.account_type
+            account_id =accountData.account_id            
+            if (check === "no") {
+              res.clearCookie("jwt")
+            }
+      
       }
       res.locals.accountData = accountData
       res.locals.loggedin = 1
@@ -257,20 +259,21 @@ Util.buildTypeView = async function (req, res, next) {
 
  Util.buildMessageHead = () =>{
   let grid6
-  switch (check) {
-    case "yes":
+  if (check === "yes") {
       grid6 = "Welcome " + name + `<br>`
-      grid6 += `<a title="Click to log out" onclick="${check="no"}"  href="/" > Log Out </a>`
+      grid6 += `<a title="Click to log out"  href="/" onclick="${clearCache()}" > Log Out </a>`
       return grid6
-    case "no":
-      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
+      
+    }else if(check === "out"){
+      
+      grid6 = `<a title="Click to log in" onclick="${check="no"}" href="/account/" > My Account </a>`
       return grid6
-    case "out":
-      grid6 = `<a title="Click to log in" href="/account/">My Account</a>`
+    }else {
+      grid6 = `<a title="Click to log in"  href="/account/" onclick="${check="out"}"> My Account </a>`
       return grid6
 
-  }
-  
+    }
+    
  
 }
 
